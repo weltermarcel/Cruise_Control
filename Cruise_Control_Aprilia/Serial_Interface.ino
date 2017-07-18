@@ -39,7 +39,7 @@ void Serial_Control() {																//compares the received information with 
 		Serial.println("serial_interface(0/1)");
 		Serial.println("clear memory");
 		Serial.println("pulser_time(float)");
-		Serial.print("servo_override(0/1, pos[)"); Serial.print(min_pos); Serial.print(","); Serial.print(max_pos); Serial.println("]");
+		Serial.print("servo_override(0/1, pos["); Serial.print(min_pos); Serial.print(","); Serial.print(max_pos); Serial.println("]");
 		Serial.println("RTTTL");
 		Serial.println("reset");
 	}

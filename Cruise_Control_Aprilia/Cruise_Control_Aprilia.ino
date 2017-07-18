@@ -64,7 +64,7 @@ int v_diff_up = 2;                                  //tolerance between v_soll a
 int v_diff_down = -1;                               //tolerance beteween v_soll and v_ist to deaccelerate
 int override_factor = 3;                            //pos_servo = v_ist / override_factor
 int min_pos = 5;                                    //servo's min position
-int max_pos = min_pos + 110;                        //servo's max position
+int max_pos = 155;						            //servo's max position
 int override_pos = min_pos + 5;                     //servo must be under this value to override its position according to speed
 int tone_offset = 15;                               //to lower RPM's for song with servo
 int min_tone_frequency = 600;                       //for song with servo (262)
@@ -282,7 +282,7 @@ void loop() {
 			pos_servo = pos_servo - step_down;
 		}
 	}
-
+	SerialEvent();
 	Serial_Interface();
 	EEPROM_Control();
 	LCD_Control();
