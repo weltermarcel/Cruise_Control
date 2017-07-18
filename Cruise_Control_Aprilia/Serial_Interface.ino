@@ -40,6 +40,11 @@ void Serial_Control() {																//compares the received information with 
 		Serial.println("clear memory");
 		Serial.println("pulser_time(float)");
 		Serial.print("servo_override(0/1, pos["); Serial.print(min_pos); Serial.print(","); Serial.print(max_pos); Serial.println("]");
+		Serial.println("pid_p(float)");
+		Serial.println("pid_i(float)");
+		Serial.println("pid_d(float)");
+		Serial.println("i_max(float)");
+		Serial.println("pid_max(float)");
 		Serial.println("RTTTL");
 		Serial.println("reset");
 	}
@@ -76,6 +81,7 @@ void Serial_Control() {																//compares the received information with 
 		string_int_2 = Input_String[2].toInt();
 		Override_Servo = string_int_1;
 		pos_servo = string_int_2;
+		pos_servo_pid = string_int_2;
 	}
 
 	if (Input_String[0] == "pid_p" && flag_input_complete == true) {
@@ -104,8 +110,7 @@ void Serial_Control() {																//compares the received information with 
 	}
 
 	if (flag_input_complete) {														//deletes information on Input_String array
-
-		/*Serial.print("Input_String[0]: ");
+																					/*Serial.print("Input_String[0]: ");
 		Serial.println(Input_String[0]);
 		Serial.print("Input_String[1]: ");
 		Serial.println(Input_String[1]);
@@ -142,6 +147,7 @@ void Serial_Interface() {
 
 	if (Status_Serial_Interface == true) {
 		if (millis() - last_millis_1 >= serial_refresh * 1000) {
+			last_millis_1 = millis();
 			/*Serial.print("Time: ");
 			Serial.print(rtc.getTime().hour, DEC);
 			Serial.print(": ");
@@ -177,6 +183,18 @@ void Serial_Interface() {
 			Serial.println();
 			last_millis_1 = millis();*/
 			debug();
+
+			if (operationMode == 1) {
+				Serial.print("pos_servo: ");
+				Serial.println(pos_servo);
+				Serial.println();
+			}
+
+			else {
+				Serial.print("pos_servo_pid: ");
+				Serial.println(pos_servo_pid);
+				Serial.println();
+			}
 		}
 	}
 }

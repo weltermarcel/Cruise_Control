@@ -19,22 +19,25 @@ void PID() {
 
 	error = v_soll - v_ist;			//Error is difference between process value and set point
 
-	ppp = error;						// Proportional is just the error
+	ppp = error;					// Proportional is just the error
 
-	iii = i + error;                  //Integral
+	iii = iii + error;              //Integral
 
 									//Optional: create a dead band so the so integrel won't hunt back and fourth
 									//if(abs(error) >  1) i = i + error;  // Integrate error if error > 1
 									//if(error == 0) i = 0;               //Clear intergal if zero error
 
-	iii = constrain(i, -i_max, i_max);      //Prevent i from going to +/- infinity
+	iii = constrain(iii, -i_max, i_max);      //Prevent i from going to +/- infinity
 
 	ddd = error - lastError;        // error differential 
 	lastError = error;              // Save last error for next loop
 
 	pid = (Kp * ppp) + (Ki * iii) + (Kd * ddd);  // Do PID 
 	
-	pos_servo_pid = constrain(pid, min_pos, pid_max);            //Constrain
+	if (Override_Servo == 0) {
+
+		pos_servo_pid = constrain(pid, min_pos, pid_max);            //Constrain
+	}
 
 }
 

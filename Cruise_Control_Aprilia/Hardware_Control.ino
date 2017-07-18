@@ -46,7 +46,7 @@ void Hardware_Control() {
 	}
 	if (v_soll == 0 && Override_Servo == false) {
 		pos_servo = min_pos;
-		pos_servo_pid = 0;
+		pos_servo_pid = min_pos;
 	}
 	if (digitalRead(In_Button_Increase) == LOW && (Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true) {
 		Status_First_Change = false;
@@ -67,13 +67,16 @@ void Hardware_Control() {
 		pos_servo = last_servo_pos;
 	}
 
+	pos_servo = constrain(pos_servo, min_pos, max_pos);
+	pos_servo_pid = constrain(pos_servo_pid, min_pos, max_pos);
+
 	if (operationMode == 1) {
-
-	throttle.write(pos_servo);
-
+		
+		throttle.write(pos_servo);
 	}
 
 	if(operationMode == 2) {
+
 		throttle.write(pos_servo_pid);
 	}
 
