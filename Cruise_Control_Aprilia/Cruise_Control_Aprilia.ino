@@ -14,6 +14,8 @@ Time t;
 LiquidCrystal_I2C lcd(0x27, 20, 4); 
 Servo throttle;
 
+const int operationMode = 2;						//1 = incremental, 2 = PID
+
 const int In_Sensor_Speed = 2;                      //speed sensor pin
 
 const int In_Button_Resume = 4;                     //control between tone and servo control
@@ -70,6 +72,7 @@ int tone_offset = 15;                               //to lower RPM's for song wi
 int min_tone_frequency = 600;                       //for song with servo (262)
 int max_tone_frequency = 15000;                     //for song with servo (3951)
 int pos_servo = min_pos;                            //servo's control position
+int pos_servo_pid = min_pos;
 int Override_ServoValue = 0;
 int Override_ServoFactor = 0;
 int step_up = 3;                                    //step on servo's new setting accelerating

@@ -91,6 +91,9 @@
     <None Include="LCD_Control.ino">
       <FileType>CppCode</FileType>
     </None>
+    <None Include="PID_Control.ino">
+      <FileType>CppCode</FileType>
+    </None>
     <None Include="RTTTL.ino">
       <FileType>CppCode</FileType>
     </None>

@@ -21,6 +21,7 @@
     <None Include="Hardware_Control.ino" />
     <None Include="LCD_Control.ino" />
     <None Include="RTTTL.ino" />
+    <None Include="PID_Control.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Cruise_Control_Aprilia.vsarduino.h">

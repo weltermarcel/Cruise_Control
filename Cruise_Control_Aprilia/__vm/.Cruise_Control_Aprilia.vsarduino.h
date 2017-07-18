@@ -80,6 +80,7 @@ typedef void *__builtin_va_list;
 #include "EEPROM.ino"
 #include "Hardware_Control.ino"
 #include "LCD_Control.ino"
+#include "PID_Control.ino"
 #include "RTTTL.ino"
 #include "Serial_Interface.ino"
 #endif
