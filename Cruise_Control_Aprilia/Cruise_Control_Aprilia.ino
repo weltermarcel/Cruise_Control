@@ -13,6 +13,7 @@ DS1302 rtc(10, 11, 12);
 Time t;
 LiquidCrystal_I2C lcd(0x27, 20, 4); 
 Servo throttle;
+
 const int In_Sensor_Speed = 2;                      //speed sensor pin
 
 const int In_Button_Resume = 4;                     //control between tone and servo control
@@ -30,10 +31,10 @@ bool Status_First_Change = true;
 bool Status_Time_Min_Push = false;
 bool Status_Time_Double_Push = false;
 bool Override_Servo = false;
-bool Status_LCD_Backlight = true;                          //lcd's backlight control
+bool Status_LCD_Backlight = true;                   //lcd's backlight control
 bool Status_Cruise_Control = true;                  //default ON or OFF
-bool Flag_Clock_Set = false;                             //1 to set, 0 to lock
-bool Status_Serial_Interface = false;                         //serial interface on or off
+bool Flag_Clock_Set = false;                        //1 to set, 0 to lock
+bool Status_Serial_Interface = false;               //serial interface on or off
 bool Status_Servo = false;                          //servo deattached until void loop() is once run (to avoid movement at startup)
 bool Flag_Servo_Music = false;
 bool Flag_Show_Temp = true;

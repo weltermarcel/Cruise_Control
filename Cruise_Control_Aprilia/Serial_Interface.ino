@@ -1,44 +1,120 @@
-void Serial_Interface() {
+int i_input_string = 0;
+int last_input_string = i_input_string;
+int string_int_1;
+int string_int_2;
+int string_int_3;
+float string_float_1;
+float string_float_2;
+float string_float_3;
+bool flag_input_complete = false;
+String Input_String[5];
 
-	if (Serial.available() > 0) {
-		command = intEinlesen("command: ");
+void SerialEvent() {																//checks if serial information is available and compiles it in an array
+
+	if (Serial.available() > 0 && flag_input_complete != true) {
+
+		char inChar = (char)Serial.read();
+		if (inChar == '(' || inChar == ')' || inChar == '\n' || inChar == ',') {
+			last_input_string = i_input_string;
+			i_input_string = 4;
+		}
+		Input_String[i_input_string] += inChar;
+		if (i_input_string == 4) {
+			i_input_string = last_input_string + 1;
+		}
+		if (inChar == '\n') {
+			flag_input_complete = true;
+		}
 	}
-	if (command == 1) {
+	Serial_Control();																//calls Serial_Control after new information is received
+}
+
+void Serial_Control() {																//compares the received information with possible commands
+
+	if (Input_String[0] == "help" && flag_input_complete == true) {					//lists all recognizable commands when sent over the virtual com port
+
 		Serial.println();
 		Serial.println("Commands:");
-		Serial.println("1: Commands list");
-		Serial.println("2: Status_Serial_Interface");
-		Serial.println("3: clear EEPROM");
-		Serial.println("4: pulser time");
-		Serial.println("98: play song with servo");
-		Serial.println("99: auto reset");
-		command = 0;
+		Serial.println();
+		Serial.println("serial_interface(0/1)");
+		Serial.println("clear memory");
+		Serial.println("pulser_time(float)");
+		Serial.print("servo_override(0/1, pos[)"); Serial.print(min_pos); Serial.print(","); Serial.print(max_pos); Serial.println("]");
+		Serial.println("RTTTL");
+		Serial.println("reset");
 	}
-	if (command == 2) {
-		Status_Serial_Interface = doubleEinlesen("Status_Serial_Interface: ");
-		command = 0;
+
+	if (Input_String[0] == "serial_interface" && flag_input_complete == true) {
+		string_int_1 = Input_String[1].toInt();
+		Status_Serial_Interface = string_int_1;
 	}
-	if (command == 3) {
+
+	if (Input_String[0] == "clear memory" && flag_input_complete == true) {
 		for (z = 0; z < 512; z++)
 			EEPROM.write(z, 0);
-		Serial.println("EEPROM cleared");
-		command = 0;
 	}
-	if (command == 4) {
-		pulser_time = doubleEinlesen("pulser_time: ");
-		command = 0;
+
+	if (Input_String[0] == "pulser_time" && flag_input_complete == true) {
+		string_float_1 = Input_String[1].toFloat();
+		pulser_time = string_float_1;
 	}
-	if (command == 98) {
+
+	if (Input_String[0] == "¨RTTTL" && flag_input_complete == true) {
 		Flag_Servo_Music = true;
 		play_rtttl(song);
 		command = 0;
 		Flag_Servo_Music = false;
 	}
-	if (command == 99) {
+
+	if (Input_String[0] == "reset" && flag_input_complete == true) {
 		delay(Time_Delay_Reset * 1000);
 		digitalWrite(Out_Reset, LOW);
-		command = 0;
 	}
+
+	if (Input_String[0] == "servo_override" && flag_input_complete == true) {
+		string_int_1 = Input_String[1].toInt();
+		string_int_2 = Input_String[2].toInt();
+		Override_Servo = string_int_1;
+		pos_servo = string_int_2;
+	}
+
+	if (flag_input_complete) {														//deletes information on Input_String array
+
+		/*Serial.print("Input_String[0]: ");
+		Serial.println(Input_String[0]);
+		Serial.print("Input_String[1]: ");
+		Serial.println(Input_String[1]);
+		Serial.print("Input_String[2]: ");
+		Serial.println(Input_String[2]);
+		Serial.print("Input_String[3]: ");
+		Serial.println(Input_String[3]);
+		Serial.print("Input_String[4]: ");
+		Serial.println(Input_String[4]);
+
+		Serial.print("Input_String[0]: ");
+		Serial.println(Input_String[0]);
+		Serial.print("Input_String[1]: ");
+		Serial.println(Input_String[1]);
+		Serial.print("Input_String[2]: ");
+		Serial.println(Input_String[2]);
+		Serial.print("Input_String[3]: ");
+		Serial.println(Input_String[3]);
+		Serial.print("Input_String[4]: ");
+		Serial.println(Input_String[4]);*/
+
+		Input_String[0] = "";
+		Input_String[1] = "";
+		Input_String[2] = "";
+		Input_String[3] = "";
+		Input_String[4] = "";
+		i_input_string = 0;
+		flag_input_complete = false;
+	}
+}
+
+
+void Serial_Interface() {
+
 	if (Status_Serial_Interface == true) {
 		if (millis() - last_millis_1 >= serial_refresh * 1000) {
 			Serial.print("Time: ");
