@@ -59,7 +59,7 @@ void Serial_Control() {																//compares the received information with 
 		pulser_time = string_float_1;
 	}
 
-	if (Input_String[0] == "¨RTTTL" && flag_input_complete == true) {
+	if (Input_String[0] == "RTTTL" && flag_input_complete == true) {
 		Flag_Servo_Music = true;
 		play_rtttl(song);
 		command = 0;
@@ -76,6 +76,31 @@ void Serial_Control() {																//compares the received information with 
 		string_int_2 = Input_String[2].toInt();
 		Override_Servo = string_int_1;
 		pos_servo = string_int_2;
+	}
+
+	if (Input_String[0] == "pid_p" && flag_input_complete == true) {
+		string_float_1 = Input_String[1].toFloat();
+		ppp = string_float_1;
+	}
+
+	if (Input_String[0] == "pid_i" && flag_input_complete == true) {
+		string_float_1 = Input_String[1].toFloat();
+		iii = string_float_1;
+	}
+
+	if (Input_String[0] == "pid_d" && flag_input_complete == true) {
+		string_float_1 = Input_String[1].toFloat();
+		ddd = string_float_1;
+	}
+
+	if (Input_String[0] == "i_max" && flag_input_complete == true) {
+		string_float_1 = Input_String[1].toFloat();
+		i_max = string_float_1;
+	}
+
+	if (Input_String[0] == "pid_max" && flag_input_complete == true) {
+		string_float_1 = Input_String[1].toFloat();
+		pid_max = string_float_1;
 	}
 
 	if (flag_input_complete) {														//deletes information on Input_String array

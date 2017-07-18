@@ -13,7 +13,7 @@ float lastError = 0;
 float pid = 0;
 
 float i_max = 20; //2000
-float max_pid = 50;
+float pid_max = 50;
 
 void PID() {
 
@@ -34,7 +34,7 @@ void PID() {
 
 	pid = (Kp * ppp) + (Ki * iii) + (Kd * ddd);  // Do PID 
 	
-	pos_servo_pid = constrain(pid, 0, max_pid);            //Constrain to valid PWM range -127 to 127.  zero = stopped
+	pos_servo_pid = constrain(pid, min_pos, pid_max);            //Constrain
 
 }
 
