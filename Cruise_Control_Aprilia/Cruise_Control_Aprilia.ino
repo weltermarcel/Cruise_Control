@@ -285,8 +285,10 @@ void loop() {
 			pos_servo = pos_servo - step_down;
 		}
 	}
+
 	SerialEvent();
 	Serial_Interface();
+	PID();
 	EEPROM_Control();
 	LCD_Control();
 	Hardware_Control();

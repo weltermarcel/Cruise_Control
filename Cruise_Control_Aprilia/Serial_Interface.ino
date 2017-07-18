@@ -117,7 +117,7 @@ void Serial_Interface() {
 
 	if (Status_Serial_Interface == true) {
 		if (millis() - last_millis_1 >= serial_refresh * 1000) {
-			Serial.print("Time: ");
+			/*Serial.print("Time: ");
 			Serial.print(rtc.getTime().hour, DEC);
 			Serial.print(": ");
 			Serial.print(rtc.getTime().min, DEC);
@@ -150,7 +150,8 @@ void Serial_Interface() {
 			Serial.print("loop_time: ");
 			Serial.println(loop_time, 3);
 			Serial.println();
-			last_millis_1 = millis();
+			last_millis_1 = millis();*/
+			debug();
 		}
 	}
 }
