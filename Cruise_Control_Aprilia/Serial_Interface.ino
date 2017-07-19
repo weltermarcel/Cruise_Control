@@ -40,9 +40,9 @@ void Serial_Control() {																//compares the received information with 
 		Serial.println("clear memory");
 		Serial.println("pulser_time(float)");
 		Serial.print("servo_override(0/1, pos["); Serial.print(min_pos); Serial.print(","); Serial.print(max_pos); Serial.println("]");
-		Serial.println("pid_p(float)");
-		Serial.println("pid_i(float)");
-		Serial.println("pid_d(float)");
+		Serial.println("kp(float)");
+		Serial.println("ki(float)");
+		Serial.println("kd(float)");
 		Serial.println("i_max(float)");
 		Serial.println("pid_max(float)");
 		Serial.println("RTTTL");
@@ -84,19 +84,19 @@ void Serial_Control() {																//compares the received information with 
 		pos_servo_pid = string_int_2;
 	}
 
-	if (Input_String[0] == "pid_p" && flag_input_complete == true) {
+	if (Input_String[0] == "kp" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
-		ppp = string_float_1;
+		Kp = string_float_1;
 	}
 
-	if (Input_String[0] == "pid_i" && flag_input_complete == true) {
+	if (Input_String[0] == "ki" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
-		iii = string_float_1;
+		Ki = string_float_1;
 	}
 
-	if (Input_String[0] == "pid_d" && flag_input_complete == true) {
+	if (Input_String[0] == "kd" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
-		ddd = string_float_1;
+		Kd = string_float_1;
 	}
 
 	if (Input_String[0] == "i_max" && flag_input_complete == true) {

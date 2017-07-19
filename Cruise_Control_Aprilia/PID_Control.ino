@@ -1,6 +1,6 @@
-float Kp = 5.5;
-float Ki = 5.5;
-float Kd = 5.5;
+float Kp = 2;
+float Ki = 1.5;
+float Kd = 1.2;
 
 float ppp = 0;
 float iii = 0;
@@ -17,7 +17,16 @@ float pid_max = 50;
 
 void PID() {
 
-	error = v_soll - v_ist;			//Error is difference between process value and set point
+	if (v_soll == 0) {
+		error = 0;
+		ppp = 0;
+		iii = 0;
+		ddd = 0;
+	}
+
+	else {
+	error = v_soll - v_ist;
+	}
 
 	ppp = error;					// Proportional is just the error
 

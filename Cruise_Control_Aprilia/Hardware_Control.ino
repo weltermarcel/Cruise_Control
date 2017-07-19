@@ -31,7 +31,7 @@ void Hardware_Control() {
 	}
 	if (digitalRead(In_Sensor_Brake) == LOW && digitalRead(In_Button_Resume) == LOW && v_ist == 0 && ((Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true)) {
 		Status_First_Change = false;
-		play_rtttl(song);
+		//play_rtttl(song);
 	}
 	if (digitalRead(In_Sensor_Brake) == LOW && (Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true) {
 		Status_First_Change = false;
@@ -60,6 +60,7 @@ void Hardware_Control() {
 		Status_First_Change = false;
 		v_soll = v_ist;
 		pos_servo = min_pos + (v_ist / override_factor);
+		iii = min_pos + (v_ist / override_factor);
 	}
 	if (digitalRead(In_Button_Resume) == LOW && pos_servo < override_pos && ((Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true)) {
 		Status_First_Change = false;
