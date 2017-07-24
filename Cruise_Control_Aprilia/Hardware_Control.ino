@@ -2,7 +2,7 @@ void Hardware_Control() {
 
 	//Pulser control
 	if ((millis() - last_millis_10 >= pulser_time * 1000) && pulser_time != 0) {
-		digitalWrite(In_Pulser, !digitalRead(In_Pulser));
+		digitalWrite(Out_Pulser, !digitalRead(Out_Pulser));
 		last_millis_10 = millis();
 	}
 
@@ -31,7 +31,8 @@ void Hardware_Control() {
 	}
 	if (digitalRead(In_Sensor_Brake) == LOW && digitalRead(In_Button_Resume) == LOW && v_ist == 0 && ((Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true)) {
 		Status_First_Change = false;
-		//play_rtttl(song);
+		extern char *song;
+		play_rtttl(song);
 	}
 	if (digitalRead(In_Sensor_Brake) == LOW && (Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true) {
 		Status_First_Change = false;
@@ -60,6 +61,7 @@ void Hardware_Control() {
 		Status_First_Change = false;
 		v_soll = v_ist;
 		pos_servo = min_pos + (v_ist / override_factor);
+		extern float iii;
 		iii = min_pos + (v_ist / override_factor);
 	}
 	if (digitalRead(In_Button_Resume) == LOW && pos_servo < override_pos && ((Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true)) {

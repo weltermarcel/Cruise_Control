@@ -1,19 +1,19 @@
-float Kp = 2;
-float Ki = 1.5;
-float Kd = 1.2;
+float Kp = 1.2;
+float Ki = 1.15;
+float Kd = 0.3;
 
-float ppp = 0;
-float iii = 0;
-float ddd = 0;
+float ppp = 0.0;
+float iii = 0.0;
+float ddd = 0.0;
 
+float deadband = 1.0;
+float error = 0.0;
+float lastError = 0.0;
 
-float error = 0;
-float lastError = 0;
+float pid = 0.1;
 
-float pid = 0;
-
-float i_max = 20; //2000
-float pid_max = 50;
+float i_max = 20;
+float pid_max = (float)max_pos * 0.65;
 
 void PID() {
 
@@ -24,17 +24,29 @@ void PID() {
 		ddd = 0;
 	}
 
-	else {
+	if (v_soll != 0) {
+
+	if (v_ist < 55) {
+		Kp = 1.2;
+		Ki = 0.97;
+		Kd = 0.3;
+	}
+
+	if (v_ist >= 55) {
+		Kp = 1.2;
+		Ki = 1.12;
+		Kd = 0.3;
+	}
+
 	error = v_soll - v_ist;
+	
 	}
 
 	ppp = error;					// Proportional is just the error
-
-	iii = iii + error;              //Integral
-
-									//Optional: create a dead band so the so integrel won't hunt back and fourth
-									//if(abs(error) >  1) i = i + error;  // Integrate error if error > 1
-									//if(error == 0) i = 0;               //Clear intergal if zero error
+	
+	if (abs(error) >= deadband) {
+		iii = iii + error;
+	}
 
 	iii = constrain(iii, -i_max, i_max);      //Prevent i from going to +/- infinity
 

@@ -64,6 +64,11 @@ void Serial_Control() {																//compares the received information with 
 		pulser_time = string_float_1;
 	}
 
+	if (Input_String[0] == "v_soll" && flag_input_complete == true) {
+		string_float_1 = Input_String[1].toFloat();
+		v_soll = string_float_1;
+	}
+
 	if (Input_String[0] == "RTTTL" && flag_input_complete == true) {
 		Flag_Servo_Music = true;
 		play_rtttl(song);
@@ -191,6 +196,10 @@ void Serial_Interface() {
 			}
 
 			else {
+				Serial.print("v_ist: ");
+				Serial.println(v_ist);
+				Serial.print("v_soll: ");
+				Serial.println(v_soll);
 				Serial.print("pos_servo_pid: ");
 				Serial.println(pos_servo_pid);
 				Serial.println();
