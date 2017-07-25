@@ -1,6 +1,9 @@
-float Kp = 1.2;
-float Ki = 1.15;
-float Kd = 0.3;
+float Kp = 0.5;
+float Ki = 0.5;
+float Kd = 0.5;
+
+float increment_small = 0.05;
+float increment_big = 2;
 
 float ppp = 0.0;
 float iii = 0.0;
@@ -10,10 +13,11 @@ float deadband = 1.0;
 float error = 0.0;
 float lastError = 0.0;
 
-float pid = 0.1;
+float pid = 0.0;
 
-float i_max = 20;
-float pid_max = (float)max_pos * 0.65;
+float i_max = max_pos;
+float i_min = -5;
+float pid_max = (float)max_pos * 0.45;
 
 void PID() {
 
@@ -26,17 +30,17 @@ void PID() {
 
 	if (v_soll != 0) {
 
-	if (v_ist < 55) {
+	/*if (v_ist < 55) {
 		Kp = 1.2;
-		Ki = 0.97;
+		Ki = 0.8;
 		Kd = 0.3;
 	}
 
 	if (v_ist >= 55) {
 		Kp = 1.2;
-		Ki = 1.12;
+		Ki = 1.0;
 		Kd = 0.3;
-	}
+	}*/
 
 	error = v_soll - v_ist;
 	
@@ -48,7 +52,7 @@ void PID() {
 		iii = iii + error;
 	}
 
-	iii = constrain(iii, -i_max, i_max);      //Prevent i from going to +/- infinity
+	iii = constrain(iii, i_min, i_max);      //Prevent i from going to +/- infinity
 
 	ddd = error - lastError;        // error differential 
 	lastError = error;              // Save last error for next loop
