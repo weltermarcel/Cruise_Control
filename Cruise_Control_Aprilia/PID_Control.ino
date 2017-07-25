@@ -16,9 +16,8 @@ float lastError = 0.0;
 float pid = 0.0;
 
 float i_max = max_pos;
-float i_min = -5;
-float pid_max = (float)max_pos * 0.45;
-
+float i_min = 0.0;
+float pid_max = (float)max_pos * 0.65;
 void PID() {
 
 	if (v_soll == 0) {
@@ -30,17 +29,17 @@ void PID() {
 
 	if (v_soll != 0) {
 
-	/*if (v_ist < 55) {
+		/*if (v_ist < 55) {
 		Kp = 1.2;
 		Ki = 0.8;
 		Kd = 0.3;
-	}
+		}
 
-	if (v_ist >= 55) {
+		if (v_ist >= 55) {
 		Kp = 1.2;
 		Ki = 1.0;
 		Kd = 0.3;
-	}*/
+		}*/
 
 	error = v_soll - v_ist;
 	
