@@ -45,7 +45,6 @@ void Serial_Control() {																//compares the received information with 
 		Serial.println("pid_d(float)");
 		Serial.println("i_max(float)");
 		Serial.println("pid_max(float)");
-		Serial.println("RTTTL");
 		Serial.println("reset");
 	}
 
@@ -62,13 +61,6 @@ void Serial_Control() {																//compares the received information with 
 	if (Input_String[0] == "pulser_time" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
 		pulser_time = string_float_1;
-	}
-
-	if (Input_String[0] == "RTTTL" && flag_input_complete == true) {
-		Flag_Servo_Music = true;
-		play_rtttl(song);
-		command = 0;
-		Flag_Servo_Music = false;
 	}
 
 	if (Input_String[0] == "reset" && flag_input_complete == true) {

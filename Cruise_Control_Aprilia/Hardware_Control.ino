@@ -2,7 +2,7 @@ void Hardware_Control() {
 
 	//Pulser control
 	if ((millis() - last_millis_10 >= pulser_time * 1000) && pulser_time != 0) {
-		digitalWrite(In_Pulser, !digitalRead(In_Pulser));
+		digitalWrite(Out_Pulser, !digitalRead(Out_Pulser));
 		last_millis_10 = millis();
 	}
 
@@ -29,11 +29,7 @@ void Hardware_Control() {
 		Status_LCD_Backlight = true;
 		last_millis_4 = millis();
 	}
-	if (digitalRead(In_Sensor_Brake) == LOW && digitalRead(In_Button_Resume) == LOW && v_ist == 0 && ((Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true)) {
-		Status_First_Change = false;
-		extern char *song;
-		play_rtttl(song);
-	}
+
 	if (digitalRead(In_Sensor_Brake) == LOW && (Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true) {
 		Status_First_Change = false;
 		if (pos_servo > min_pos) {

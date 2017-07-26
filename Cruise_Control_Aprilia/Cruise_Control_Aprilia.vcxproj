@@ -94,9 +94,6 @@
     <None Include="PID_Control.ino">
       <FileType>CppCode</FileType>
     </None>
-    <None Include="RTTTL.ino">
-      <FileType>CppCode</FileType>
-    </None>
     <None Include="Serial_Interface.ino">
       <FileType>CppCode</FileType>
     </None>
