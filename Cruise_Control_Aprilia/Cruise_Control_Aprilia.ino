@@ -19,8 +19,8 @@ const int operationMode = 2;						//1 = incremental, 2 = PID
 float Time_PID_Loop = 0.2;							//PID Loop time [s]
 
 const int In_Sensor_Speed = 2;                      //speed sensor pin
-const int In_Button_Resume = 4;                     //control between tone and servo control
 const int Out_Pulser = 3;                           //simulate speed over Serial_Interface
+const int In_Button_Resume = 4;                     //control between tone and servo control
 const int In_Button_Increase = 5;                   //increase speed
 const int In_Button_Decrease = 6;                   //decrease speed
 const int In_Button_Set = 7;                        //set speed
