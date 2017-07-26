@@ -7,7 +7,7 @@ float string_float_1;
 float string_float_2;
 float string_float_3;
 bool flag_input_complete = false;
-String Input_String[5];
+String Input_String[15];
 
 void SerialEvent() {																//checks if serial information is available and compiles it in an array
 
