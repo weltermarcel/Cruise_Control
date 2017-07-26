@@ -49,7 +49,7 @@ void Serial_Control() {																//compares the received information with 
 		Serial.println("reset");
 	}
 
-	if (Input_String[0] == "serial_interface" && flag_input_complete == true) {
+/*	if (Input_String[0] == "serial_interface" && flag_input_complete == true) {
 		string_int_1 = Input_String[1].toInt();
 		Status_Serial_Interface = string_int_1;
 	}
@@ -83,6 +83,8 @@ void Serial_Control() {																//compares the received information with 
 		pos_servo = string_int_2;
 		pos_servo_pid = string_int_2;
 	}
+
+	*/
 
 	if (Input_String[0] == "kp" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
