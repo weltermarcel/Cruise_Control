@@ -7,7 +7,7 @@ float string_float_1;
 float string_float_2;
 float string_float_3;
 bool flag_input_complete = false;
-String Input_String[15];
+String Input_String[5];
 
 void SerialEvent() {																//checks if serial information is available and compiles it in an array
 
@@ -40,16 +40,16 @@ void Serial_Control() {																//compares the received information with 
 		Serial.println("clear memory");
 		Serial.println("pulser_time(float)");
 		Serial.print("servo_override(0/1, pos["); Serial.print(min_pos); Serial.print(","); Serial.print(max_pos); Serial.println("]");
-		Serial.println("kp(float)");
-		Serial.println("ki(float)");
-		Serial.println("kd(float)");
+		Serial.println("pid_p(float)");
+		Serial.println("pid_i(float)");
+		Serial.println("pid_d(float)");
 		Serial.println("i_max(float)");
 		Serial.println("pid_max(float)");
 		Serial.println("RTTTL");
 		Serial.println("reset");
 	}
 
-/*	if (Input_String[0] == "serial_interface" && flag_input_complete == true) {
+	if (Input_String[0] == "serial_interface" && flag_input_complete == true) {
 		string_int_1 = Input_String[1].toInt();
 		Status_Serial_Interface = string_int_1;
 	}
@@ -84,61 +84,19 @@ void Serial_Control() {																//compares the received information with 
 		pos_servo_pid = string_int_2;
 	}
 
-	*/
-
-	if (Input_String[0] == "kp" && flag_input_complete == true) {
+	if (Input_String[0] == "pid_p" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
-		Kp = string_float_1;
-	}
-	
-	if (Input_String[0] == "kp_plus" && flag_input_complete == true) {
-		Kp = Kp + increment_small;
+		ppp = string_float_1;
 	}
 
-	if (Input_String[0] == "kp_minus" && flag_input_complete == true) {
-		Kp = Kp - increment_small;
-	}
-
-	if (Input_String[0] == "ki_plus" && flag_input_complete == true) {
-		Ki = Ki + increment_small;
-	}
-
-	if (Input_String[0] == "ki_minus" && flag_input_complete == true) {
-		Ki = Ki - increment_small;
-	}
-
-	if (Input_String[0] == "kd_plus" && flag_input_complete == true) {
-		Kd = Kd + increment_small;
-	}
-
-	if (Input_String[0] == "kd_minus" && flag_input_complete == true) {
-		Kd = Kd - increment_small;
-	}
-
-	if (Input_String[0] == "i_min_plus" && flag_input_complete == true) {
-		i_min = i_min + increment_big;
-	}
-
-	if (Input_String[0] == "i_min_minus" && flag_input_complete == true) {
-		i_min = i_min - increment_big;
-	}
-
-	if (Input_String[0] == "pid_max_plus" && flag_input_complete == true) {
-		pid_max = pid_max + increment_small;
-	}
-
-	if (Input_String[0] == "pid_max_minus" && flag_input_complete == true) {
-		pid_max = pid_max - increment_small;
-	}
-
-	if (Input_String[0] == "ki" && flag_input_complete == true) {
+	if (Input_String[0] == "pid_i" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
-		Ki = string_float_1;
+		iii = string_float_1;
 	}
 
-	if (Input_String[0] == "kd" && flag_input_complete == true) {
+	if (Input_String[0] == "pid_d" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
-		Kd = string_float_1;
+		ddd = string_float_1;
 	}
 
 	if (Input_String[0] == "i_max" && flag_input_complete == true) {
