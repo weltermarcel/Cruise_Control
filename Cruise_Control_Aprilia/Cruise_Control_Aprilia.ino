@@ -12,21 +12,20 @@ DHT dht(DHTPIN, DHTTYPE);
 DS1302 rtc(10, 11, 12);
 Time t;
 
-LiquidCrystal_I2C lcd(0x27, 20, 4); 
+LiquidCrystal_I2C lcd(0x27, 20, 4);
 Servo throttle;
 
 const int operationMode = 2;						//1 = incremental, 2 = PID
+float Time_PID_Loop = 0.2;							//PID Loop time [s]
 
 const int In_Sensor_Speed = 2;                      //speed sensor pin
-
 const int In_Button_Resume = 4;                     //control between tone and servo control
+const int Out_Pulser = 3;                           //simulate speed over Serial_Interface
 const int In_Button_Increase = 5;                   //increase speed
 const int In_Button_Decrease = 6;                   //decrease speed
 const int In_Button_Set = 7;                        //set speed
 const int Out_Servo = 8;                            //servo's control pin
 const int In_Sensor_Brake = 9;                      //0 kmh -> to brake light
-
-const int In_Pulser = 13;                           //simulate speed over Serial_Interface
 const int tonePin = A1;                             //Piezo pin
 const int Out_Reset = A2;                           //to upload sketch
 const int Time_Delay_Reset = 3;                     //reset delay to change from serial monitor to upload interface
@@ -107,7 +106,6 @@ float screen_refresh = 0.5;                         //time to refresh screen
 float EEPROM_read_refresh = 0.5;                    //refresh time of EEPROM.read for dist_total calculation
 float loop_time = 0;
 float last_pulse_time = 0;                          //reference time for pulse_time
-float Time_PID_Loop = 0.1;							//PID Loop time [s]
 String inputString1 = "";
 String inputString2 = "";
 String inputString3 = "";
@@ -140,7 +138,7 @@ void setup() {
 	pinMode(In_Button_Resume, INPUT_PULLUP);
 	pinMode(Out_Reset, OUTPUT);
 	pinMode(In_Sensor_Speed, INPUT);
-	pinMode(In_Pulser, OUTPUT);
+	pinMode(Out_Pulser, OUTPUT);
 	attachInterrupt(0, velocity, RISING);
 	if (Flag_Clock_Set == true) {
 		rtc.halt(false);

@@ -1,20 +1,23 @@
-float Kp = 2;
-float Ki = 1.5;
-float Kd = 1.2;
+float Kp = 0.5;
+float Ki = 0.5;
+float Kd = 0.5;
 
-float ppp = 0;
-float iii = 0;
-float ddd = 0;
+float increment_small = 0.05;
+float increment_big = 2;
 
+float ppp = 0.0;
+float iii = 0.0;
+float ddd = 0.0;
 
-float error = 0;
-float lastError = 0;
+float deadband = 1.0;
+float error = 0.0;
+float lastError = 0.0;
 
-float pid = 0;
+float pid = 0.0;
 
-float i_max = 20; //2000
-float pid_max = 50;
-
+float i_max = max_pos;
+float i_min = 0.0;
+float pid_max = (float)max_pos * 0.65;
 void PID() {
 
 	if (v_soll == 0) {
@@ -24,19 +27,31 @@ void PID() {
 		ddd = 0;
 	}
 
-	else {
+	if (v_soll != 0) {
+
+		/*if (v_ist < 55) {
+		Kp = 1.2;
+		Ki = 0.8;
+		Kd = 0.3;
+		}
+
+		if (v_ist >= 55) {
+		Kp = 1.2;
+		Ki = 1.0;
+		Kd = 0.3;
+		}*/
+
 	error = v_soll - v_ist;
+	
 	}
 
 	ppp = error;					// Proportional is just the error
+	
+	if (abs(error) >= deadband) {
+		iii = iii + error;
+	}
 
-	iii = iii + error;              //Integral
-
-									//Optional: create a dead band so the so integrel won't hunt back and fourth
-									//if(abs(error) >  1) i = i + error;  // Integrate error if error > 1
-									//if(error == 0) i = 0;               //Clear intergal if zero error
-
-	iii = constrain(iii, -i_max, i_max);      //Prevent i from going to +/- infinity
+	iii = constrain(iii, i_min, i_max);      //Prevent i from going to +/- infinity
 
 	ddd = error - lastError;        // error differential 
 	lastError = error;              // Save last error for next loop
@@ -47,7 +62,6 @@ void PID() {
 
 		pos_servo_pid = constrain(pid, min_pos, pid_max);            //Constrain
 	}
-
 }
 
 void debug() {
