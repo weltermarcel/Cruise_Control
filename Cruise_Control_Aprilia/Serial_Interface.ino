@@ -7,7 +7,7 @@ float string_float_1;
 float string_float_2;
 float string_float_3;
 bool flag_input_complete = false;
-String Input_String[5];
+String Input_String[15];
 
 void SerialEvent() {																//checks if serial information is available and compiles it in an array
 
@@ -64,11 +64,6 @@ void Serial_Control() {																//compares the received information with 
 		pulser_time = string_float_1;
 	}
 
-	if (Input_String[0] == "v_soll" && flag_input_complete == true) {
-		string_float_1 = Input_String[1].toFloat();
-		v_soll = string_float_1;
-	}
-
 	if (Input_String[0] == "RTTTL" && flag_input_complete == true) {
 		Flag_Servo_Music = true;
 		play_rtttl(song);
@@ -92,6 +87,46 @@ void Serial_Control() {																//compares the received information with 
 	if (Input_String[0] == "kp" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
 		Kp = string_float_1;
+	}
+	
+	if (Input_String[0] == "kp_plus" && flag_input_complete == true) {
+		Kp = Kp + increment_small;
+	}
+
+	if (Input_String[0] == "kp_minus" && flag_input_complete == true) {
+		Kp = Kp - increment_small;
+	}
+
+	if (Input_String[0] == "ki_plus" && flag_input_complete == true) {
+		Ki = Ki + increment_small;
+	}
+
+	if (Input_String[0] == "ki_minus" && flag_input_complete == true) {
+		Ki = Ki - increment_small;
+	}
+
+	if (Input_String[0] == "kd_plus" && flag_input_complete == true) {
+		Kd = Kd + increment_small;
+	}
+
+	if (Input_String[0] == "kd_minus" && flag_input_complete == true) {
+		Kd = Kd - increment_small;
+	}
+
+	if (Input_String[0] == "i_min_plus" && flag_input_complete == true) {
+		i_min = i_min + increment_big;
+	}
+
+	if (Input_String[0] == "i_min_minus" && flag_input_complete == true) {
+		i_min = i_min - increment_big;
+	}
+
+	if (Input_String[0] == "pid_max_plus" && flag_input_complete == true) {
+		pid_max = pid_max + increment_small;
+	}
+
+	if (Input_String[0] == "pid_max_minus" && flag_input_complete == true) {
+		pid_max = pid_max - increment_small;
 	}
 
 	if (Input_String[0] == "ki" && flag_input_complete == true) {
@@ -196,10 +231,6 @@ void Serial_Interface() {
 			}
 
 			else {
-				Serial.print("v_ist: ");
-				Serial.println(v_ist);
-				Serial.print("v_soll: ");
-				Serial.println(v_soll);
 				Serial.print("pos_servo_pid: ");
 				Serial.println(pos_servo_pid);
 				Serial.println();
