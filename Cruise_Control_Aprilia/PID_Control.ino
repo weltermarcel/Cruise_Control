@@ -1,6 +1,6 @@
-float Kp = 1.0;
-float Ki = 0.3;
-float Kd = 1.0;
+float Kp = 2.00;
+float Ki = 0.26;
+float Kd = 0.10;
 
 float increment_small = 0.01;
 float increment_big = 1;

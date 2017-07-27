@@ -33,7 +33,12 @@ void Hardware_Control() {
 	if (digitalRead(In_Sensor_Brake) == LOW && (Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true) {
 		Status_First_Change = false;
 		if (pos_servo > min_pos) {
-			last_servo_pos = pos_servo;
+			if (operationMode == 1) {
+				last_servo_pos = pos_servo;
+			}
+			if (operationMode == 2) {
+				last_servo_pos = pos_servo_pid;
+			}
 			last_speed = v_soll;
 		}
 		v_soll = 0;
@@ -58,12 +63,16 @@ void Hardware_Control() {
 		v_soll = v_ist;
 		pos_servo = min_pos + (v_ist / override_factor);
 		extern float iii;
-		iii = min_pos + (v_ist / override_factor);
+		extern float Ki;
+		iii = (min_pos + (v_ist / override_factor)) / Ki;
 	}
 	if (digitalRead(In_Button_Resume) == LOW && pos_servo < override_pos && ((Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true)) {
 		Status_First_Change = false;
 		v_soll = last_speed;
 		pos_servo = last_servo_pos;
+		extern float iii;
+		extern float Ki;
+		iii = last_servo_pos / Ki;
 	}
 
 	pos_servo = constrain(pos_servo, min_pos, max_pos);
