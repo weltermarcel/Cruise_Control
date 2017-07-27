@@ -1,9 +1,9 @@
-float Kp = 0.5;
-float Ki = 0.5;
-float Kd = 0.5;
+float Kp = 1.0;
+float Ki = 0.3;
+float Kd = 1.0;
 
-float increment_small = 0.05;
-float increment_big = 2;
+float increment_small = 0.01;
+float increment_big = 1;
 
 float ppp = 0.0;
 float iii = 0.0;
@@ -16,7 +16,7 @@ float lastError = 0.0;
 float pid = 0.0;
 
 float i_max = max_pos;
-float i_min = 0.0;
+float i_min = min_pos;
 float pid_max = (float)max_pos * 0.65;
 void PID() {
 
@@ -29,20 +29,7 @@ void PID() {
 
 	if (v_soll != 0) {
 
-		/*if (v_ist < 55) {
-		Kp = 1.2;
-		Ki = 0.8;
-		Kd = 0.3;
-		}
-
-		if (v_ist >= 55) {
-		Kp = 1.2;
-		Ki = 1.0;
-		Kd = 0.3;
-		}*/
-
 	error = v_soll - v_ist;
-	
 	}
 
 	ppp = error;					// Proportional is just the error
@@ -62,26 +49,4 @@ void PID() {
 
 		pos_servo_pid = constrain(pid, min_pos, pid_max);            //Constrain
 	}
-}
-
-void debug() {
-
-	Serial.print("error: ");
-	Serial.println(error);
-	Serial.print("Kp: ");
-	Serial.println(Kp);
-	Serial.print("Ki: ");
-	Serial.println(Ki);
-	Serial.print("Kd: ");
-	Serial.println(Kd);
-	Serial.print("pid: ");
-	Serial.println(pid);
-	Serial.print("p: ");
-	Serial.println(ppp);
-	Serial.print("i: ");
-	Serial.println(iii);
-	Serial.print("d: ");
-	Serial.println(ddd);
-	Serial.println();
-
 }
