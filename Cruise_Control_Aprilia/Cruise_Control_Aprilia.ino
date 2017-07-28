@@ -64,7 +64,7 @@ int counter_1 = 0;                                  //EEPROM control
 int pulses_pro_rotation = 1;                        //full pulses (holes/pulses_asymmetry) in a whole rotation
 int v_diff_up = 2;                                  //tolerance between v_soll and v_ist to accelerate
 int v_diff_down = -1;                               //tolerance beteween v_soll and v_ist to deaccelerate
-int override_factor = 3;                            //pos_servo = v_ist / override_factor
+int override_factor = 2;                            //pos_servo = v_ist / override_factor
 int min_pos = 5;                                    //servo's min position
 int max_pos = 155;						            //servo's max position
 int override_pos = min_pos + 5;                     //servo must be under this value to override its position according to speed
