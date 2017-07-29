@@ -2,9 +2,6 @@ float Kp = 2.00;
 float Ki = 0.25;
 float Kd = 0.10;
 
-float increment_small = 0.01;
-float increment_big = 1;
-
 float ppp = 0.0;
 float iii = 0.0;
 float ddd = 0.0;
@@ -32,21 +29,20 @@ void PID() {
 	error = v_soll - v_ist;
 	}
 
-	ppp = error;					// Proportional is just the error
+	ppp = error;
 	
 	if (abs(error) >= deadband) {
 		iii = iii + error;
 	}
 
-	iii = constrain(iii, i_min, i_max);      //Prevent i from going to +/- infinity
+	iii = constrain(iii, i_min, i_max);
 
-	ddd = error - lastError;        // error differential 
-	lastError = error;              // Save last error for next loop
+	ddd = error - lastError;
+	lastError = error;
 
-	pid = (Kp * ppp) + (Ki * iii) + (Kd * ddd);  // Do PID 
+	pid = (Kp * ppp) + (Ki * iii) + (Kd * ddd);
 	
 	if (Override_Servo == 0) {
-
-		pos_servo_pid = constrain(pid, min_pos, pid_max);            //Constrain
+		pos_servo_pid = constrain(pid, min_pos, pid_max);
 	}
 }

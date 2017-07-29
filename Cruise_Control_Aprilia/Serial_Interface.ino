@@ -48,7 +48,7 @@ void Serial_Control() {																//compares the received information with 
 		Serial.println("reset");
 	}
 
-	/*	if (Input_String[0] == "serial_debugging" && flag_input_complete == true) {
+	if (Input_String[0] == "serial_debugging" && flag_input_complete == true) {
 	string_int_1 = Input_String[1].toInt();
 	Status_Serial_Debugging = string_int_1;
 	}
@@ -76,51 +76,9 @@ void Serial_Control() {																//compares the received information with 
 	pos_servo_pid = string_int_2;
 	}
 
-	*/
-
 	if (Input_String[0] == "kp" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
 		Kp = string_float_1;
-	}
-
-	if (Input_String[0] == "kp_plus" && flag_input_complete == true) {
-		Kp = Kp + increment_small;
-	}
-
-	if (Input_String[0] == "kp_minus" && flag_input_complete == true) {
-		Kp = Kp - increment_small;
-	}
-
-	if (Input_String[0] == "ki_plus" && flag_input_complete == true) {
-		Ki = Ki + increment_small;
-	}
-
-	if (Input_String[0] == "ki_minus" && flag_input_complete == true) {
-		Ki = Ki - increment_small;
-	}
-
-	if (Input_String[0] == "kd_plus" && flag_input_complete == true) {
-		Kd = Kd + increment_small;
-	}
-
-	if (Input_String[0] == "kd_minus" && flag_input_complete == true) {
-		Kd = Kd - increment_small;
-	}
-
-	if (Input_String[0] == "i_min_plus" && flag_input_complete == true) {
-		i_min = i_min + increment_big;
-	}
-
-	if (Input_String[0] == "i_min_minus" && flag_input_complete == true) {
-		i_min = i_min - increment_big;
-	}
-
-	if (Input_String[0] == "pid_max_plus" && flag_input_complete == true) {
-		pid_max = pid_max + increment_small;
-	}
-
-	if (Input_String[0] == "pid_max_minus" && flag_input_complete == true) {
-		pid_max = pid_max - increment_small;
 	}
 
 	if (Input_String[0] == "ki" && flag_input_complete == true) {
@@ -131,16 +89,6 @@ void Serial_Control() {																//compares the received information with 
 	if (Input_String[0] == "kd" && flag_input_complete == true) {
 		string_float_1 = Input_String[1].toFloat();
 		Kd = string_float_1;
-	}
-
-	if (Input_String[0] == "i_max" && flag_input_complete == true) {
-		string_float_1 = Input_String[1].toFloat();
-		i_max = string_float_1;
-	}
-
-	if (Input_String[0] == "pid_max" && flag_input_complete == true) {
-		string_float_1 = Input_String[1].toFloat();
-		pid_max = string_float_1;
 	}
 
 	if (flag_input_complete) {														//deletes information on Input_String array
