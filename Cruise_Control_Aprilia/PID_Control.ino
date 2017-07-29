@@ -1,5 +1,5 @@
 float Kp = 2.00;
-float Ki = 0.26;
+float Ki = 0.25;
 float Kd = 0.10;
 
 float increment_small = 0.01;

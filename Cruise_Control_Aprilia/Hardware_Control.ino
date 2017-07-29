@@ -52,15 +52,35 @@ void Hardware_Control() {
 	}
 	if (digitalRead(In_Button_Increase) == LOW && (Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true) {
 		Status_First_Change = false;
-		v_soll++;
+		v_soll = v_soll + 5;
 	}
 	if (digitalRead(In_Button_Decrease) == LOW && (Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true) {
 		Status_First_Change = false;
-		v_soll--;
+		v_soll = v_soll - 5;
 	}
 	if (digitalRead(In_Button_Set) == LOW && ((Status_Time_Double_Push == true || Status_First_Change == true) && Status_Time_Min_Push == true)) {
 		Status_First_Change = false;
-		v_soll = v_ist;
+		if (v_ist > 25) {
+			v_soll = 30;
+		}
+		if (v_ist > 40) {
+			v_soll = 50;
+		}
+		if (v_ist > 55) {
+			v_soll = 60;
+		}
+		if (v_ist > 70) {
+			v_soll = 80;
+		}
+		if (v_ist > 90) {
+			v_soll = 100;
+		}
+		if (v_ist > 110) {
+			v_soll = 120;
+		}
+		if (v_ist > 130) {
+			v_soll = 140;
+		}
 		pos_servo = min_pos + (v_ist / override_factor);
 		extern float iii;
 		extern float Ki;
